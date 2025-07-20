@@ -176,93 +176,95 @@ const Section = ({ id, title, children, className = '' }) => (
 
 // --- Layout Components ---
 
-const Header = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
-    const navLinks = [
-        { href: "#home", label: "Home", icon: <Home size={16} /> },
-        { href: conferenceInfo.brochureLink, label: "Brochure", icon: <FileText size={16} />, target: "_blank" },
-        { href: "#about", label: "About", icon: <Info size={16} /> },
-        { href: "#highlights", label: "Highlights", icon: <Star size={16} /> },
-        { href: "#papers", label: "Call for Papers", icon: <BookOpen size={16} /> },
-        { href: "#committee", label: "Committee", icon: <Users size={16} /> },
-        { href: "#registration", label: "Registration", icon: <Ticket size={16} /> },
-        { href: "#contact", label: "Contact Us", icon: <Phone size={16} /> },
-    ];
-
-    return (
-        <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-blue-900/90 backdrop-blur-lg shadow-xl' : 'bg-blue-900'} `}>
-            <div className="container mx-auto px-4 ">
-                {/* Top bar with logos and affiliation */}
-                <div className="flex justify-between items-center h-20 md:-mx-28 ">
-                    {/* Left Logo & Title */}
-                    <a href="#home" className="flex items-center space-x-3">
-                        <img src={conferenceInfo.aitLogoUrl} alt="AIT Logo" className="h-14 bg-white p-1 rounded-md shadow-sm" />
-                        <div className="hidden lg:flex flex-col text-white">
-                           <span className="font-bold text-xl tracking-wider hidden md:block">{conferenceInfo.longName}</span>
-                           <span className="text-xs">{conferenceInfo.affiliation}</span>
+    const Header = () => {
+        const [isOpen, setIsOpen] = useState(false);
+        const [isScrolled, setIsScrolled] = useState(false);
+    
+        useEffect(() => {
+            const handleScroll = () => {
+                setIsScrolled(window.scrollY > 10);
+            };
+            window.addEventListener('scroll', handleScroll);
+            return () => window.removeEventListener('scroll', handleScroll);
+        }, []);
+    
+        const navLinks = [
+            { href: "#home", label: "Home", icon: <Home size={16} /> },
+            { href: conferenceInfo.brochureLink, label: "Brochure", icon: <FileText size={16} />, target: "_blank" },
+            { href: "#about", label: "About", icon: <Info size={16} /> },
+            { href: "#highlights", label: "Highlights", icon: <Star size={16} /> },
+            { href: "#papers", label: "Call for Papers", icon: <BookOpen size={16} /> },
+            { href: "#committee", label: "Committee", icon: <Users size={16} /> },
+            { href: "#registration", label: "Registration", icon: <Ticket size={16} /> },
+            { href: "#contact", label: "Contact Us", icon: <Phone size={16} /> },
+        ];
+    
+        return (
+            <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-blue-900/90 backdrop-blur-lg shadow-xl' : 'bg-blue-900'}`}>
+                <div className="container mx-auto px-4">
+                    {/* Top bar with logos and affiliation */}
+                    <div className="flex justify-between items-center h-20">
+                        {/* Left Logo & Title */}
+                        <a href="#home" className="flex items-center space-x-3">
+                            <img src={conferenceInfo.aitLogoUrl} alt="AIT Logo" className="h-14 bg-white p-1 rounded-md shadow-sm" />
+                            <div className="hidden lg:flex flex-col text-white">
+                                <span className="font-bold text-xl tracking-wider">{conferenceInfo.longName}</span>
+                                <span className="text-xs">{conferenceInfo.affiliation}</span>
+                            </div>
+                        </a>
+    
+                        {/* Desktop Nav in the middle */}
+                        <nav className="hidden md:flex items-center space-x-4">
+                            {navLinks.map(link => (
+                                <a
+                                    key={link.label}
+                                    href={link.href}
+                                    target={link.target}
+                                    rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+                                    className="flex items-center space-x-2 px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
+                                >
+                                    {link.icon}
+                                    <span className="text-md font-semibold">{link.label}</span>
+                                </a>
+                            ))}
+                        </nav>
+    
+                        {/* Right side: AWES Logo for desktop, Menu for mobile */}
+                        <div className="flex items-center space-x-4">
+                            <img src={conferenceInfo.headerRightLogoUrl} alt="AWES Logo" className="h-14 hidden md:block" />
+                            <div className="md:hidden">
+                                <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
+                                    {isOpen ? <X size={30} /> : <Menu size={30} />}
+                                </button>
+                            </div>
                         </div>
-                    </a>
-
-                    {/* Desktop Nav in the middle */}
-                    <nav className="hidden md:flex items-center space-x-1  ">
+                    </div>
+                </div>
+    
+                {/* Mobile Menu */}
+                <div className={`md:hidden absolute w-full bg-blue-900/95 backdrop-blur-lg transition-all duration-500 ease-in-out ${isOpen ? 'max-h-screen' : 'max-h-0'} overflow-hidden`}>
+                    <nav className="px-2 pt-2 pb-4 space-y-4 sm:px-3">
                         {navLinks.map(link => (
                             <a
                                 key={link.label}
                                 href={link.href}
                                 target={link.target}
                                 rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
-                                className="flex items-center space-x-2 px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
+                                className="flex items-center space-x-4 px-3 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 block"
+                                onClick={() => setIsOpen(false)}
                             >
                                 {link.icon}
-                                <span className="text-md font-semibold">{link.label}</span>
+                                <span className="font-medium">{link.label}</span>
                             </a>
                         ))}
                     </nav>
-
-                    {/* Right side: AWES Logo for desktop, Menu for mobile */}
-                    <div className="flex items-center">
-                       <img src={conferenceInfo.headerRightLogoUrl} alt="AWES Logo" className="h-14 hidden md:block" />
-                       <div className="md:hidden">
-                            <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
-                                {isOpen ? <X size={30} /> : <Menu size={30} />}
-                            </button>
-                        </div>
-                    </div>
                 </div>
-            </div>
-
-            {/* Mobile Menu */}
-            <div className={`md:hidden absolute w-full bg-blue-900/95 backdrop-blur-lg transition-all duration-500 ease-in-out ${isOpen ? 'max-h-screen' : 'max-h-0'} overflow-hidden`}>
-                <nav className="px-2 pt-2 pb-4 space-y-1 sm:px-3">
-                    {navLinks.map(link => (
-                        <a
-                            key={link.label}
-                            href={link.href}
-                            target={link.target}
-                            rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
-                            className="flex items-center space-x-4 px-3 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200 block"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            {link.icon}
-                            <span className="font-medium">{link.label}</span>
-                        </a>
-                    ))}
-                </nav>
-            </div>
-        </header>
-    );
-};
-
+            </header>
+        );
+    };
+    
 
 const HeroSection = () => (
     <section id="home" className="scroll-mt-20">
@@ -341,33 +343,98 @@ const ImportantDatesTimeline = () => (
       </div>
   </div>
 );
-  
+
+
 const CallForPapersSection = () => (
-<Section id="papers" title="Call for Papers & Important Dates">
-  <div className="grid lg:grid-cols-2 gap-64 items-start w-[80%] mx-auto">
-    <ImportantDatesTimeline />
-    <div>
-      <h3 className="text-2xl font-bold text-gray-700 mb-6 text-center lg:text-left">Paper Topics</h3>
-      <div className="columns-1 sm:columns-2 space-y-3">
-        {paperTopics.map((track, index) => (
-          <div key={index} className="flex items-center break-inside-avoid p-2">
-            <BookOpen className="w-5 h-5 text-blue-600 mr-3 flex-shrink-0" />
-            <p className="text-gray-700">{track}</p>
-          </div>
-        ))}
+  <Section id="papers" title="Call for Papers & Important Dates">
+    <div className="flex flex-col w-[100%] mx-auto">
+      {/* Centered Timeline */}
+      <div className="flex items-center justify-center">
+        <ImportantDatesTimeline />
       </div>
-      
-    </div>
-    
-  </div>
-  <div className="mt-8 text-center">
-        <a href={conferenceInfo.paperSubmissionLink} target="_blank" rel="noopener noreferrer" className="inline-flex  items-center bg-blue-600
-         text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition-transform duration-300 shadow-md hover:scale-105">
-          <LinkIcon className="mr-2"/> Submit Your Paper
+
+      {/* Paper Topics Horizontal Scroller */}
+      <div>
+        <h3 className="text-2xl justify-center w-[100%] font-bold text-gray-700 mb-6 text-center mt-6">Paper Topics</h3>
+        <div className="relative overflow-hidden">
+          {/* Three lines for scrolling */}
+          <div className="flex overflow-hidden">
+            <div className="flex animate-scroll-x space-x-4">
+              {paperTopics.map((track, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-48 h-24 bg-gray-100 p-2 m-2 rounded-lg shadow-lg flex items-center justify-center text-gray-700"
+                >
+                  <BookOpen className="w-6 h-6 mx-2 text-blue-600" />
+                  <p className="text-xs">{track}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex overflow-hidden">
+            <div className="flex animate-scroll-x-negative space-x-4">
+              {paperTopics.map((track, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-48 h-24 bg-gray-100 p-2 m-2 rounded-lg shadow-lg flex items-center justify-center text-gray-700"
+                >
+                  <BookOpen className="w-6 h-6 mx-2 text-blue-600" />
+                  <p className="text-xs">{track}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex overflow-hidden">
+            <div className="flex animate-scroll-x space-x-4">
+              {paperTopics.map((track, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-48 h-24 bg-gray-100 p-2 m-2 rounded-lg shadow-lg flex items-center justify-center text-gray-700"
+                >
+                  <BookOpen className="w-6 h-6 mx-2 text-blue-600" />
+                  <p className="text-xs">{track}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Paper Submission Link */}
+      <div className="mt-8 text-center">
+        <a
+          href={conferenceInfo.paperSubmissionLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center bg-blue-600 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-700 transition-transform duration-300 shadow-md hover:scale-105"
+        >
+          <LinkIcon className="mr-2" /> Submit Your Paper
         </a>
       </div>
-</Section>
+    </div>
+  </Section>
 );
+
+
+
+// --- CSS (Global Styles) --- 
+
+// Add the following CSS to implement the horizontal animation effect for the paper topics
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes scroll-x {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.animate-scroll-x {
+    display: flex;
+    animation: scroll-x 30s linear infinite;
+}
+`;
+document.head.appendChild(style);
 
 const AnimatedCard = ({ children, delay, className }) => {
   const [ref, isVisible] = useOnScreen({ threshold: 0.1 });
@@ -582,7 +649,7 @@ const Footer = () => (
 // --- Main App Component ---
 export default function App() {
   return (
-    <div className="bg-white font-sans">
+    <div className="bg-white font-sans w-screen overflow-hidden">
       <Header />
       <main>
         <HeroSection />
