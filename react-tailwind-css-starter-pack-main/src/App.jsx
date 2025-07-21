@@ -7,6 +7,8 @@ import { BookOpen, Calendar, Users, Mail, MapPin, Star, Building, Link as LinkIc
 import LogoAIT from './Assets/Logo-AIT.gif';
 import LogoAWES from './Assets/Logo-AWES.gif';
 import BirdViewAIT from './Assets/Bird-View-AIT.jpg';
+import LogoIEEE from './Assets/ieee.jpg'
+import LogoACM from './Assets/acm.jpeg'
 import { motion } from 'framer-motion';
 import {  } from 'lucide-react';
 
@@ -270,12 +272,26 @@ const HeroSection = () => (
         {/* This section contains the main title and hero image */}
         <div className="bg-white pt-12 pb-6 text-center m-auto w-[70%]">
             <p className="text-gray-600 font-bold pb-5">Department of Information Technology, AIT Pune Organises</p>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase text-gray-800 mt-2 px-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase text-gray-800 mt-2 px-4 leading-tight ">
                 {conferenceInfo.title}
             </h1>
             <p className="font-semibold text-2xl text-gray-700 mt-2">({conferenceInfo.acronym})</p>
-            <p className="text-red-600 font-bold text-xl mt-4">{conferenceInfo.date}</p>
-            <p className="text-gray-500">({conferenceInfo.mode})</p>
+
+            <div className='flex items-center justify-between w-screen max-h-max'>
+                  <div className='w-[30%] flex items-center justify-center'>
+                      <img src={LogoIEEE} className='h-20'/>
+                  </div>
+
+                  <div className='w-[40%]'>
+                      
+                      <p className="text-red-600 font-bold text-xl mt-4">{conferenceInfo.date}</p>
+                      <p className="text-gray-500">({conferenceInfo.mode})</p>
+                  </div>
+
+                  <div className='w-[30%] flex items-center justify-center'>
+                      <img src={LogoACM} className='h-20'/>
+                  </div>
+            </div>
         </div>
         <div className="container mx-auto px-4 mt-4">
             <div 
@@ -353,7 +369,7 @@ const CallForPapersSection = () => (
       </div>
 
       {/* Paper Topics Horizontal Scroller */}
-      <div>
+      <div className='w-[80%] flex flex-col items-center m-auto'>
         <h3 className="text-2xl justify-center w-[100%] font-bold text-gray-700 mb-6 text-center mt-6">Paper Topics</h3>
         <div className="relative overflow-hidden">
           {/* Three lines for scrolling */}
