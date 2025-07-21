@@ -648,7 +648,7 @@ const Footer = () => (
 // --- Main App Component ---
 export default function App() {
   return (
-    <div className="bg-white font-sans w-screen overflow-hidden">
+    <div className="bg-white font-sans w-screen ">
       <Header />
       <main>
         <HeroSection />
