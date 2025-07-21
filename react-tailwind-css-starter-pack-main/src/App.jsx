@@ -107,12 +107,12 @@ const importantDates = [
 ];
 
 const registrationDetails = [
-    { category: "Student/Research Scholar", ieeeMember: "₹4000", nonIeeeMember: "₹5000" },
+    { category: "Student/Research Scholar", ieeeMember: "₹5000", nonIeeeMember: "₹7000" },
     { category: "Academicians", ieeeMember: "₹6400", nonIeeeMember: "₹8000" },
     { category: "Industry Persons", ieeeMember: "₹7200", nonIeeeMember: "₹9000" },
-    { category: "Foreign Delegates", ieeeMember: "$150", nonIeeeMember: "$200" },
+    { category: "Conference Attendee", ieeeMember: "₹3200", nonIeeeMember: "₹4000" },
     { category: "Extra Page Charges per Page", ieeeMember: "₹800", nonIeeeMember: "₹1000" },
-    { category: "Foreign Authors", ieeeMember: "$50", nonIeeeMember: "$100" }
+    { category: "Foreign Authors", ieeeMember: "$95", nonIeeeMember: "$120" }
 ];
 
 const useOnScreen = (options) => {
@@ -202,21 +202,20 @@ const Section = ({ id, title, children, className = '' }) => (
         ];
     
         return (
-            <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-blue-900/90 backdrop-blur-lg shadow-xl' : 'bg-blue-900'}`}>
-                <div className="container mx-auto px-4">
+            <header className={`sticky top-0 z-50 transition-all w-screen duration-300 ${isScrolled ? 'bg-blue-900/90 backdrop-blur-lg shadow-xl' : 'bg-blue-900'}`}>
+                <div className=" mx-auto px-4 ">
                     {/* Top bar with logos and affiliation */}
-                    <div className="flex justify-between items-center h-20">
+                    <div className="flex lg:justify-evenly justify-between items-center h-20 ">
                         {/* Left Logo & Title */}
                         <a href="#home" className="flex items-center space-x-3">
-                            <img src={conferenceInfo.aitLogoUrl} alt="AIT Logo" className="h-14 bg-white p-1 rounded-md shadow-sm" />
-                            <div className="hidden lg:flex flex-col text-white">
-                                <span className="font-bold text-xl tracking-wider">{conferenceInfo.longName}</span>
-                                <span className="text-xs">{conferenceInfo.affiliation}</span>
+                            <img src={conferenceInfo.aitLogoUrl} alt="AIT Logo" className="h-14 w-auto bg-white p-1 rounded-md shadow-sm object-cover" />
+                            <div className="hidden lg:flex  text-white">
+                                <span className="font-bold text-xl ">{conferenceInfo.longName}</span>
                             </div>
                         </a>
     
                         {/* Desktop Nav in the middle */}
-                        <nav className="hidden md:flex items-center space-x-4">
+                        <nav className="hidden md:flex md:items-center md:justify-between ">
                             {navLinks.map(link => (
                                 <a
                                     key={link.label}
@@ -233,7 +232,7 @@ const Section = ({ id, title, children, className = '' }) => (
     
                         {/* Right side: AWES Logo for desktop, Menu for mobile */}
                         <div className="flex items-center space-x-4">
-                            <img src={conferenceInfo.headerRightLogoUrl} alt="AWES Logo" className="h-14 hidden md:block" />
+                            <img src={conferenceInfo.headerRightLogoUrl} alt="AWES Logo" className="h-14 w-auto hidden md:block" />
                             <div className="md:hidden">
                                 <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
                                     {isOpen ? <X size={30} /> : <Menu size={30} />}
