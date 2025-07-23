@@ -7,6 +7,8 @@ import { BookOpen, Calendar, Users, Mail, MapPin, Star, Building, Link as LinkIc
 import LogoAIT from './Assets/Logo-AIT.gif';
 import LogoAWES from './Assets/Logo-AWES.gif';
 import BirdViewAIT from './Assets/Bird-View-AIT.jpg';
+import LogoIEEE from './Assets/ieee.jpg'
+import LogoACM from './Assets/acm.jpeg'
 import { motion } from 'framer-motion';
 import {  } from 'lucide-react';
 
@@ -107,12 +109,12 @@ const importantDates = [
 ];
 
 const registrationDetails = [
-    { category: "Student/Research Scholar", ieeeMember: "₹4000", nonIeeeMember: "₹5000" },
+    { category: "Student/Research Scholar", ieeeMember: "₹5000", nonIeeeMember: "₹7000" },
     { category: "Academicians", ieeeMember: "₹6400", nonIeeeMember: "₹8000" },
     { category: "Industry Persons", ieeeMember: "₹7200", nonIeeeMember: "₹9000" },
-    { category: "Foreign Delegates", ieeeMember: "$150", nonIeeeMember: "$200" },
+    { category: "Conference Attendee", ieeeMember: "₹3200", nonIeeeMember: "₹4000" },
     { category: "Extra Page Charges per Page", ieeeMember: "₹800", nonIeeeMember: "₹1000" },
-    { category: "Foreign Authors", ieeeMember: "$50", nonIeeeMember: "$100" }
+    { category: "Foreign Authors", ieeeMember: "$95", nonIeeeMember: "$120" }
 ];
 
 const useOnScreen = (options) => {
@@ -202,21 +204,20 @@ const Section = ({ id, title, children, className = '' }) => (
         ];
     
         return (
-            <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-blue-900/90 backdrop-blur-lg shadow-xl' : 'bg-blue-900'}`}>
-                <div className="container mx-auto px-4">
+            <header className={`sticky top-0 z-50 transition-all w-screen duration-300 ${isScrolled ? 'bg-blue-900/90 backdrop-blur-lg shadow-xl' : 'bg-blue-900'}`}>
+                <div className=" mx-auto px-4 ">
                     {/* Top bar with logos and affiliation */}
-                    <div className="flex justify-between items-center h-20">
+                    <div className="flex lg:justify-evenly justify-between items-center h-20 ">
                         {/* Left Logo & Title */}
                         <a href="#home" className="flex items-center space-x-3">
-                            <img src={conferenceInfo.aitLogoUrl} alt="AIT Logo" className="h-14 bg-white p-1 rounded-md shadow-sm" />
-                            <div className="hidden lg:flex flex-col text-white">
-                                <span className="font-bold text-xl tracking-wider">{conferenceInfo.longName}</span>
-                                <span className="text-xs">{conferenceInfo.affiliation}</span>
+                            <img src={conferenceInfo.aitLogoUrl} alt="AIT Logo" className="h-14 w-auto bg-white p-1 rounded-md shadow-sm object-cover" />
+                            <div className="hidden lg:flex  text-white">
+                                <span className="font-bold text-xl ">{conferenceInfo.longName}</span>
                             </div>
                         </a>
     
                         {/* Desktop Nav in the middle */}
-                        <nav className="hidden md:flex items-center space-x-4">
+                        <nav className="hidden md:flex md:items-center md:justify-between ">
                             {navLinks.map(link => (
                                 <a
                                     key={link.label}
@@ -233,7 +234,7 @@ const Section = ({ id, title, children, className = '' }) => (
     
                         {/* Right side: AWES Logo for desktop, Menu for mobile */}
                         <div className="flex items-center space-x-4">
-                            <img src={conferenceInfo.headerRightLogoUrl} alt="AWES Logo" className="h-14 hidden md:block" />
+                            <img src={conferenceInfo.headerRightLogoUrl} alt="AWES Logo" className="h-14 w-auto hidden md:block" />
                             <div className="md:hidden">
                                 <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
                                     {isOpen ? <X size={30} /> : <Menu size={30} />}
@@ -271,12 +272,26 @@ const HeroSection = () => (
         {/* This section contains the main title and hero image */}
         <div className="bg-white pt-12 pb-6 text-center m-auto w-[70%]">
             <p className="text-gray-600 font-bold pb-5">Department of Information Technology, AIT Pune Organises</p>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase text-gray-800 mt-2 px-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase text-gray-800 mt-2 px-4 leading-tight ">
                 {conferenceInfo.title}
             </h1>
             <p className="font-semibold text-2xl text-gray-700 mt-2">({conferenceInfo.acronym})</p>
-            <p className="text-red-600 font-bold text-xl mt-4">{conferenceInfo.date}</p>
-            <p className="text-gray-500">({conferenceInfo.mode})</p>
+
+            <div className='flex items-center justify-between w-screen max-h-max'>
+                  <div className='w-[30%] flex items-center justify-center'>
+                      <img src={LogoIEEE} className='h-20'/>
+                  </div>
+
+                  <div className='w-[40%]'>
+                      
+                      <p className="text-red-600 font-bold text-xl mt-4">{conferenceInfo.date}</p>
+                      <p className="text-gray-500">({conferenceInfo.mode})</p>
+                  </div>
+
+                  <div className='w-[30%] flex items-center justify-center'>
+                      <img src={LogoACM} className='h-20'/>
+                  </div>
+            </div>
         </div>
         <div className="container mx-auto px-4 mt-4">
             <div 
@@ -354,7 +369,7 @@ const CallForPapersSection = () => (
       </div>
 
       {/* Paper Topics Horizontal Scroller */}
-      <div>
+      <div className='w-[80%] flex flex-col items-center m-auto'>
         <h3 className="text-2xl justify-center w-[100%] font-bold text-gray-700 mb-6 text-center mt-6">Paper Topics</h3>
         <div className="relative overflow-hidden">
           {/* Three lines for scrolling */}
@@ -649,7 +664,7 @@ const Footer = () => (
 // --- Main App Component ---
 export default function App() {
   return (
-    <div className="bg-white font-sans w-screen overflow-hidden">
+    <div className="bg-white font-sans w-screen ">
       <Header />
       <main>
         <HeroSection />
