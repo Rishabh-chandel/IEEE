@@ -29,15 +29,15 @@ const conferenceInfo = {
   aitLogoUrl: LogoAIT,
   headerRightLogoUrl: LogoAWES,
   heroImageUrl: BirdViewAIT,
-  brochureLink: "#", // Placeholder link
+  brochureLink: "https://drive.google.com/drive/folders/1cP5THaMcE3kiJKDuCVSDir7Uhquq1xsE", // Placeholder link
   paperSubmissionLink: "https://easychair.org/cfp/ICNDIA2026"
 };
 
 const committee = {
-  chiefPatron: { name: "Brig Abhay A Bhat", title: "Director" },
-  patron: { name: "Col MK Prasad", title: "Joint Director" },
+  patron: { name: "Col MK Prasad", title: "Director" },
   conferenceCommitteeChair: { name: "Dr B P Patil", title: "Principal" },
   generalChair: { name: "Dr. Sangeeta Jadhav", title: "HOD IT" },
+  generalChair1: { name: "Dr. Ashwini Sapkal" },
   generalCoChairs: [
     { name: "Dr. Vaishali Sci/Engr Ingale", title: "" },
     { name: "Dr. Dipika Rajendra Birari", title: "" }
@@ -102,14 +102,14 @@ const paperTopics = [
 
 const importantDates = [
   { event: "Last Date for Receiving Full Paper", date: "13th Feb, 2026" },
-  { event: "Paper Acceptance Notification", date: "15th May, 2026" },
+  { event: "Paper Acceptance Notification", date: "29th May, 2026" },
   { event: "Last Date for Camera Ready Copy", date: "30th June, 2026" },
-  { event: "Last Date of Registration", date: "30th June, 2026" },
+  { event: "Last Date of Registration", date: "30th July, 2026" },
   { event: "Conference Dates", date: "18th-19th Sept, 2026" },
 ];
 
 const registrationDetails = [
-    { category: "Student/Research Scholar", ieeeMember: "₹5000", nonIeeeMember: "₹7000" },
+    { category: "Student/Research Scholar", ieeeMember: "₹5600", nonIeeeMember: "₹7000" },
     { category: "Academicians", ieeeMember: "₹6400", nonIeeeMember: "₹8000" },
     { category: "Industry Persons", ieeeMember: "₹7200", nonIeeeMember: "₹9000" },
     { category: "Conference Attendee", ieeeMember: "₹3200", nonIeeeMember: "₹4000" },
@@ -494,12 +494,6 @@ const CommitteeSection = () => (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <AnimatedCard delay={0} className="md:col-span-2 lg:col-span-3">
                   <Card className="bg-blue-100 border border-blue-200 p-5 hover:shadow-xl transition-shadow">
-                      <h3 className="text-xl font-bold text-blue-800 mb-1">{committee.chiefPatron.title}</h3>
-                      <p className="text-gray-800 text-lg">{committee.chiefPatron.name}</p>
-                  </Card>
-              </AnimatedCard>
-              <AnimatedCard delay={100}>
-                   <Card className="bg-indigo-100 border border-indigo-200 p-5 hover:shadow-xl transition-shadow">
                       <h3 className="text-xl font-bold text-indigo-800 mb-1">{committee.patron.title}</h3>
                       <p className="text-gray-800 text-lg">{committee.patron.name}</p>
                   </Card>
@@ -514,6 +508,12 @@ const CommitteeSection = () => (
                    <Card className="bg-indigo-100 border border-indigo-200 p-5 hover:shadow-xl transition-shadow">
                       <h3 className="text-xl font-bold text-indigo-800 mb-1">General Chair</h3>
                       <p className="text-gray-800 text-lg">{committee.generalChair.name}, {committee.generalChair.title}</p>
+                  </Card>
+              </AnimatedCard>
+              <AnimatedCard delay={300}>
+                   <Card className="bg-indigo-100 border border-indigo-200 p-5 hover:shadow-xl transition-shadow">
+                      <h3 className="text-xl font-bold text-indigo-800 mb-1">General Chair</h3>
+                      <p className="text-gray-800 text-lg">{committee.generalChair1.name}</p>
                   </Card>
               </AnimatedCard>
               <AnimatedCard delay={150} className="md:col-span-2 lg:col-span-3">
@@ -650,13 +650,41 @@ const Footer = () => (
             </div>
 
             <div className="mt-12 border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
-                <p>&copy; {new Date().getFullYear()} {conferenceInfo.organizedBy}. All Rights Reserved.</p>
-                <div className="flex space-x-4 mt-4 md:mt-0">
-                    <a href="#" className="hover:text-white" aria-label="Twitter"><Twitter size={20} /></a>
-                    <a href="#" className="hover:text-white" aria-label="LinkedIn"><Linkedin size={20} /></a>
-                    <a href="#" className="hover:text-white" aria-label="Facebook"><Facebook size={20} /></a>
-                </div>
+              <p>
+                  &copy; {new Date().getFullYear()} {conferenceInfo.organizedBy}. All Rights Reserved.
+              </p>
+              
+              <div className="flex space-x-4 mt-4 md:mt-0">
+                <a 
+                    href="https://x.com/ait_pune" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-white" 
+                    aria-label="Twitter"
+                >
+                    <Twitter size={20} />
+                </a>
+                <a 
+                    href="https://www.linkedin.com/school/army-institute-of-technology-ait-pune/posts/?feedView=all" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-white" 
+                    aria-label="LinkedIn"
+                >
+                    <Linkedin size={20} />
+                </a>
+                <a 
+                    href="https://www.facebook.com/aitpune/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-white" 
+                    aria-label="Facebook"
+                >
+                    <Facebook size={20} />
+                </a>
             </div>
+            </div>
+
         </div>
     </footer>
   );
